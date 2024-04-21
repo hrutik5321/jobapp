@@ -2,6 +2,7 @@ package com.blaster.jobapp.job;
 
 import com.blaster.jobapp.company.Company;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +23,7 @@ public class Job {
     private String maxSalary;
     private String location;
 
+    @JsonIgnore
     @ManyToOne
     private Company company;
 

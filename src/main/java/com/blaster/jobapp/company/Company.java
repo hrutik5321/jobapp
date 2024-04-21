@@ -3,13 +3,10 @@ package com.blaster.jobapp.company;
 import java.util.List;
 
 import com.blaster.jobapp.job.Job;
+import com.blaster.jobapp.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 @Entity
 public class Company {
@@ -30,9 +27,19 @@ public class Company {
   public Company() {
   }
 
-  @JsonIgnore
   @OneToMany(mappedBy = "company")
   private List<Job> jobs;
+
+  @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
+  private List<Review> reviews;
+
+  public List<Review> getReviews() {
+    return reviews;
+  }
+
+  public void setReviews(List<Review> reviews) {
+    this.reviews = reviews;
+  }
 
   public Long getId() {
     return id;

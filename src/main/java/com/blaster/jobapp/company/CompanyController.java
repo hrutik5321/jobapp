@@ -27,6 +27,14 @@ public class CompanyController {
     return new ResponseEntity<>(companyService.getAllCompanies(), HttpStatus.OK);
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<Company> getCompanyById(@PathVariable Long id) {
+    Company company = companyService.getCompanyById(id);
+    return company != null
+        ? ResponseEntity.ok(company)
+        : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  }
+
   @PutMapping("/{id}")
   public ResponseEntity<String> updateCompany(@RequestBody Company company,@PathVariable Long id) {
     boolean isUpdated =    companyService.updateCompany(company, id);

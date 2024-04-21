@@ -13,7 +13,7 @@ import com.blaster.jobapp.company.CompanyService;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-  private CompanyRepository companyRepository;
+  private final CompanyRepository companyRepository;
 
   public CompanyServiceImpl(CompanyRepository companyRepository) {
     this.companyRepository = companyRepository;
@@ -22,7 +22,11 @@ public class CompanyServiceImpl implements CompanyService {
 
   @Override
   public List<Company> getAllCompanies() {
-    return companyRepository.findAll();
+    List<Company> companies = companyRepository.findAll();
+    for(Company company: companies) {
+      company.getReviews();
+    }
+    return companies;
   }
 
 
@@ -54,5 +58,11 @@ public class CompanyServiceImpl implements CompanyService {
     } catch (Exception e) {
       return false;
     }
+  }
+
+
+  @Override
+  public Company getCompanyById(Long id) {
+    return companyRepository.findById(id).orElse(null);
   }
 }
