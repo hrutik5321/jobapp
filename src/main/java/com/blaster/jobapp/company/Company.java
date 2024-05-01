@@ -27,6 +27,7 @@ public class Company {
   public Company() {
   }
 
+  @JsonIgnore
   @OneToMany(mappedBy = "company")
   private List<Job> jobs;
 
